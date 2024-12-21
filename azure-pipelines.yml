@@ -17,3 +17,7 @@ stages:
           $(Build.BuildId)
           latest
 - stage: DeployStage
+  jobs:
+  - job: DeployJob
+    steps:
+    
