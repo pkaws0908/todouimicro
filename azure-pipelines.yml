@@ -1,0 +1,19 @@
+trigger: none
+
+pool: bkagentlinux
+
+stages:
+- stage: buildStage
+  jobs:
+  - job: buildJob
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'docker-acr'
+        repository: 'MicroTodoUI'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          $(Build.BuildId)
+          latest
+- stage: DeployStage
