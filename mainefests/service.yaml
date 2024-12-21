@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todoapp
+  namespace: bipin
+spec:
+  selector:
+    app: todoapp
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP
