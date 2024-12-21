@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: todoapp
-        image:  
+        image: devbk247acr.azurecr.io/microtodoui:latest
         resources:
           limits:
             memory: "256Mi"
