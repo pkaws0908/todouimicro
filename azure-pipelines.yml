@@ -20,4 +20,10 @@ stages:
   jobs:
   - job: DeployJob
     steps:
-    
+    - task: KubernetesManifest@1
+      inputs:
+        action: 'deploy'
+        connectionType: 'kubernetesServiceConnection'
+        kubernetesServiceConnection: 'humara-aks'
+        namespace: 'bipin'
+        manifests: 'mainefests/*.yaml'
