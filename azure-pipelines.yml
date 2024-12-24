@@ -31,14 +31,14 @@ stages:
         tags: |
           $(Build.BuildId)
           latest
-- stage: DeployStage
-  jobs:
-  - job: DeployJob
-    steps:
-    - task: KubernetesManifest@1
-      inputs:
-        action: 'deploy'
-        connectionType: 'kubernetesServiceConnection'
-        kubernetesServiceConnection: 'humara-aks'
-        namespace: 'bipin'
-        manifests: 'mainefests/*.yaml'
+# - stage: DeployStage
+#   jobs:
+#   - job: DeployJob
+#     steps:
+#     - task: KubernetesManifest@1
+#       inputs:
+#         action: 'deploy'
+#         connectionType: 'kubernetesServiceConnection'
+#         kubernetesServiceConnection: 'humara-aks'
+#         namespace: 'bipin'
+#         manifests: 'mainefests/*.yaml'
