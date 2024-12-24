@@ -1,0 +1,36 @@
+trigger: none
+
+pool: bkagentlinux
+
+stages:
+- stage: buildStageScanStage
+  jobs:
+  - job: buildJob
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'docker-acr'
+        command: 'login'
+
+    - task: trivy@1
+      inputs:
+        version: 'latest'
+        loginDockerConfig: true
+        image: 'devbk247acr.azurecr.io/microtodoui:latest'
+        severities: 'CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'trivyScanReport'
+        publishLocation: 'Container'
+
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'docker-acr'
+        repository: 'MicroTodoUI'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          $(Build.BuildId)
+          latest
