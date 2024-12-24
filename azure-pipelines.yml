@@ -15,7 +15,7 @@ stages:
       inputs:
         version: 'latest'
         loginDockerConfig: true
-        image: 'microtodoui:latest'
+        image: 'devbk247acr.azurecr.io/microtodoui:latest'
         severities: 'CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN'
     - task: PublishBuildArtifacts@1
       inputs:
