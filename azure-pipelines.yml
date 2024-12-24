@@ -3,10 +3,25 @@ trigger: none
 pool: bkagentlinux
 
 stages:
-- stage: buildStage
+- stage: buildStageScanStage
   jobs:
   - job: buildJob
     steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'docker-acr'
+        command: 'login'
+    - task: trivy@1
+      inputs:
+        version: 'latest'
+        loginDockerConfig: true
+        image: 'microtodoui:latest'
+        severities: 'CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'trivyScanReport'
+        publishLocation: 'Container'
     - task: Docker@2
       inputs:
         containerRegistry: 'docker-acr'
