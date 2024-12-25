@@ -17,7 +17,6 @@ stages:
         loginDockerConfig: true
         image: 'devbk247acr.azurecr.io/microtodoui:latest'
         severities: 'CRITICAL,HIGH'
-        arguments: '--exit-code 0 --format json --output $(Build.ArtifactStagingDirectory)/trivy-scan-results.json'
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
