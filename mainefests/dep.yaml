@@ -1,24 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todoapp
-  namespace: bipin
+  name: todo-ui
+  namespace: pkaks
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: todoapp
+      app: todo-ui
   template:
     metadata:
       labels:
-        app: todoapp
+        app: todo-ui
     spec:
       containers:
-      - name: todoapp
-        image: devbk247acr.azurecr.io/microtodoui:latest
-        # resources:
-        #   limits:
-        #     memory: "256Mi"
-        #     cpu: "500m"
+      - name: todo-ui
+        image: pksgregistory.azurecr.io/todo-ui:v4
         ports:
         - containerPort: 80
